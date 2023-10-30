@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on Anuja Neupane Blog</title>
+    <link>https://anujaneupane.github.io/posts/</link>
+    <description>Recent content in Posts on Anuja Neupane Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 29 Oct 2023 13:22:09 +0545</lastBuildDate><atom:link href="https://anujaneupane.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>1st year C-programming project</title>
+      <link>https://anujaneupane.github.io/posts/mypost/</link>
+      <pubDate>Sun, 29 Oct 2023 13:22:09 +0545</pubDate>
+      
+      <guid>https://anujaneupane.github.io/posts/mypost/</guid>
+      <description>BANK MANAGEMENT SYSTEM This repository contains :  Log in feature Sign Up feature Profile feature  This feature contains user details and transactions history.   Withdraw feature Deposit feature Log out your account  How do you run this program? I suggest using gcc compiler, however other compiler works too. You should use following commands in terminal to run this program successfully:
+   gcc -o out main.</description>
+    </item>
+    
+  </channel>
+</rss>
