@@ -1,212 +1,1457 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto">
-
+<html lang="en">
 <head>
-	<meta name="generator" content="Hugo 0.92.2" /><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>Anuja Neupane Blog</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anuja Neupane — Filmmaker & Director</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white: #ffffff;
+  --cream: #fdf6ee;
+  --blush: #f5e6d8;
+  --terracotta: #c8735a;
+  --terracotta-dark: #a85840;
+  --rust: #8b3a2a;
+  --teal: #2a6b6e;
+  --teal-light: #3d9196;
+  --sage: #5a7a5c;
+  --navy: #1a2744;
+  --gold: #d4a853;
+  --gold-light: #e8c97a;
+  --ink: #1c1410;
+  --ink-soft: #3a2e28;
+  --muted: #8a7a70;
+  --line: rgba(200,115,90,0.15);
+}
 
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="canonical" href="https://anuja19neupane.github.io/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.5cfc680b1eeaeef9efbced92d46c2a9e876b72ee14fba85846afc4cff9e6e6f8.css" integrity="sha256-XPxoCx7q7vnvvO2S1Gwqnodrcu4U&#43;6hYRq/Ez/nm5vg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://anuja19neupane.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://anuja19neupane.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://anuja19neupane.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://anuja19neupane.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://anuja19neupane.github.io/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://anuja19neupane.github.io/index.xml">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
 
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --hljs-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-            }
+body{
+  font-family:'Outfit',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  overflow-x:hidden;
+  cursor:none;
+}
 
-            .list {
-                background: var(--theme);
-            }
+/* ── CUSTOM CURSOR ── */
+#cur{
+  width:12px;height:12px;
+  background:var(--terracotta);
+  border-radius:50%;
+  position:fixed;top:0;left:0;
+  pointer-events:none;z-index:9999;
+  transition:transform 0.1s,width 0.3s,height 0.3s,background 0.3s;
+  mix-blend-mode:normal;
+}
+#cur-ring{
+  width:44px;height:44px;
+  border:1.5px solid var(--terracotta);
+  border-radius:50%;
+  position:fixed;top:0;left:0;
+  pointer-events:none;z-index:9998;
+  opacity:0.5;
+  transition:opacity 0.3s;
+}
+body:hover #cur{opacity:1}
 
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
+/* ── LOADER ── */
+#loader{
+  position:fixed;inset:0;
+  background:var(--ink);
+  z-index:10000;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:24px;
+  transition:opacity 0.8s ease,visibility 0.8s ease;
+}
+#loader.gone{opacity:0;visibility:hidden}
+.loader-text{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(32px,5vw,64px);
+  color:var(--cream);
+  font-weight:700;
+  overflow:hidden;
+}
+.loader-text span{
+  display:inline-block;
+  animation:slideUp 0.9s cubic-bezier(0.22,1,0.36,1) forwards;
+  transform:translateY(100%);
+}
+.loader-bar-wrap{width:200px;height:2px;background:rgba(255,255,255,0.1)}
+.loader-bar{height:100%;background:var(--terracotta);width:0;animation:loadBar 1.6s ease forwards}
+@keyframes slideUp{to{transform:translateY(0)}}
+@keyframes loadBar{to{width:100%}}
 
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  padding:24px 60px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all 0.4s ease;
+}
+nav.scrolled{
+  background:rgba(253,246,238,0.92);
+  backdrop-filter:blur(16px);
+  padding:16px 60px;
+  box-shadow:0 1px 0 var(--line);
+}
+.nav-logo{
+  font-family:'Playfair Display',serif;
+  font-size:20px;font-weight:700;
+  color:var(--ink);text-decoration:none;
+  letter-spacing:0.02em;
+}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{
+  font-size:12px;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--ink-soft);text-decoration:none;font-weight:500;
+  position:relative;transition:color 0.3s;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;
+  width:0;height:1.5px;background:var(--terracotta);
+  transition:width 0.3s ease;
+}
+.nav-links a:hover{color:var(--terracotta)}
+.nav-links a:hover::after{width:100%}
 
-    </style>
-</noscript><meta property="og:title" content="Anuja Neupane Blog" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://anuja19neupane.github.io/" />
+/* ── HERO ── */
+#hero{
+  min-height:100vh;
+  position:relative;
+  display:flex;align-items:center;
+  overflow:hidden;
+  background:var(--cream);
+}
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Anuja Neupane Blog"/>
-<meta name="twitter:description" content=""/>
+/* Animated film-strip background */
+.film-strip{
+  position:absolute;top:0;right:0;bottom:0;
+  width:45%;
+  background:var(--navy);
+  clip-path:polygon(12% 0,100% 0,100% 100%,0 100%);
+  overflow:hidden;
+}
+.film-strip::before{
+  content:'';position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 48px,
+      rgba(255,255,255,0.04) 48px,
+      rgba(255,255,255,0.04) 50px
+    );
+}
+.film-strip::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 70% 40%,rgba(200,115,90,0.25) 0%,transparent 60%);
+}
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Anuja Neupane Blog",
-  "url": "https://anuja19neupane.github.io/",
-  "description": "",
-  "thumbnailUrl": "https://anuja19neupane.github.io/favicon.ico",
-  "sameAs": [
-      
-  ]
+/* Animated geometric shapes */
+.geo{position:absolute;pointer-events:none}
+.geo-circle{
+  width:500px;height:500px;
+  border-radius:50%;
+  border:1px solid rgba(200,115,90,0.12);
+  top:-100px;left:-100px;
+  animation:spinSlow 40s linear infinite;
+}
+.geo-circle2{
+  width:300px;height:300px;
+  border-radius:50%;
+  border:1px solid rgba(42,107,110,0.15);
+  bottom:100px;right:200px;
+  animation:spinSlow 30s linear infinite reverse;
+}
+.geo-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--terracotta);
+  opacity:0.4;
+  animation:floatDot 6s ease-in-out infinite;
+}
+.geo-dot:nth-child(1){top:20%;left:8%;animation-delay:0s}
+.geo-dot:nth-child(2){top:60%;left:12%;animation-delay:1.5s}
+.geo-dot:nth-child(3){top:40%;left:5%;animation-delay:3s}
+@keyframes spinSlow{to{transform:rotate(360deg)}}
+@keyframes floatDot{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+
+/* Floating particles */
+.particle{
+  position:absolute;
+  width:3px;height:3px;
+  border-radius:50%;
+  pointer-events:none;
+}
+
+.hero-content{
+  position:relative;z-index:10;
+  padding:120px 60px 80px;
+  max-width:700px;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:8px 20px;
+  border:1px solid rgba(200,115,90,0.4);
+  border-radius:100px;
+  font-size:11px;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--terracotta);font-weight:600;
+  margin-bottom:36px;
+  opacity:0;animation:revealUp 0.7s 0.4s ease forwards;
+  background:rgba(200,115,90,0.06);
+}
+.hero-tag-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--terracotta);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:0.6}}
+
+.hero-h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(54px,7vw,100px);
+  font-weight:900;
+  line-height:0.95;
+  color:var(--ink);
+  margin-bottom:8px;
+  opacity:0;animation:revealUp 0.9s 0.55s ease forwards;
+}
+.hero-h1 .line2{
+  font-style:italic;font-weight:400;
+  color:var(--terracotta);
+  display:block;
+}
+.hero-subtitle{
+  font-size:clamp(16px,2vw,22px);
+  color:var(--teal);
+  font-weight:300;letter-spacing:0.04em;
+  margin-bottom:32px;margin-top:16px;
+  opacity:0;animation:revealUp 0.9s 0.7s ease forwards;
+}
+.hero-desc{
+  font-size:16px;line-height:1.85;
+  color:var(--ink-soft);font-weight:300;
+  max-width:520px;margin-bottom:48px;
+  opacity:0;animation:revealUp 0.9s 0.85s ease forwards;
+}
+
+.hero-btns{
+  display:flex;gap:16px;flex-wrap:wrap;
+  opacity:0;animation:revealUp 0.9s 1s ease forwards;
+}
+.btn-a{
+  padding:16px 40px;
+  background:linear-gradient(135deg,var(--terracotta),var(--rust));
+  color:var(--white);
+  font-size:12px;letter-spacing:0.16em;text-transform:uppercase;
+  font-weight:600;text-decoration:none;
+  position:relative;overflow:hidden;
+  transition:transform 0.3s,box-shadow 0.3s;
+  border-radius:2px;
+  box-shadow:0 4px 24px rgba(200,115,90,0.3);
+}
+.btn-a::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--rust),var(--terracotta-dark));
+  opacity:0;transition:opacity 0.3s;
+}
+.btn-a:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(200,115,90,0.4)}
+.btn-a:hover::before{opacity:1}
+.btn-a span{position:relative;z-index:1}
+
+.btn-b{
+  padding:16px 40px;
+  border:1.5px solid var(--teal);
+  color:var(--teal);
+  font-size:12px;letter-spacing:0.16em;text-transform:uppercase;
+  font-weight:600;text-decoration:none;
+  transition:all 0.3s;border-radius:2px;
+}
+.btn-b:hover{background:var(--teal);color:var(--white);transform:translateY(-3px);box-shadow:0 8px 24px rgba(42,107,110,0.25)}
+
+/* Hero right-side visual */
+.hero-right-visual{
+  position:absolute;right:0;top:0;bottom:0;width:45%;
+  z-index:5;
+  display:flex;align-items:center;justify-content:center;
+  clip-path:polygon(15% 0,100% 0,100% 100%,0 100%);
+}
+.hero-photo-wrap{
+  position:relative;
+  margin-left:80px;
+  opacity:0;animation:revealFade 1.2s 0.6s ease forwards;
+}
+.hero-photo{
+  width:320px;height:420px;
+  object-fit:cover;
+  display:block;
+  filter:grayscale(10%);
+}
+/* Placeholder SVG portrait */
+.photo-placeholder{
+  width:320px;height:420px;
+  background:linear-gradient(160deg,#2a3d6e 0%,#1a2744 100%);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.photo-placeholder::before{
+  content:'';position:absolute;
+  bottom:0;left:0;right:0;height:60%;
+  background:linear-gradient(to top,rgba(200,115,90,0.3),transparent);
+}
+.photo-placeholder svg{position:relative;z-index:1}
+
+.hero-photo-deco{
+  position:absolute;
+  top:-20px;left:-20px;right:-20px;bottom:-20px;
+  border:1px solid rgba(200,115,90,0.3);
+  pointer-events:none;
+}
+.hero-photo-deco2{
+  position:absolute;
+  top:-40px;left:-40px;right:20px;bottom:20px;
+  border:1px solid rgba(200,115,90,0.12);
+  pointer-events:none;
+}
+.hero-role-badge{
+  position:absolute;
+  bottom:-28px;left:-40px;
+  background:var(--terracotta);
+  color:var(--white);
+  padding:18px 24px;
+  font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;
+  box-shadow:0 8px 32px rgba(200,115,90,0.4);
+}
+.hero-role-badge strong{display:block;font-size:28px;font-weight:900;letter-spacing:0;margin-bottom:2px;font-family:'Playfair Display',serif;}
+
+/* Scroll line */
+.scroll-cue{
+  position:absolute;bottom:50px;left:60px;z-index:20;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);
+  opacity:0;animation:revealFade 1s 1.4s ease forwards;
+}
+.scroll-cue-line{
+  width:1px;height:60px;
+  background:linear-gradient(to bottom,var(--terracotta),transparent);
+  animation:scrolPulse 2s 1.6s ease-in-out infinite;
+}
+@keyframes scrolPulse{0%,100%{transform:scaleY(1);opacity:0.6}50%{transform:scaleY(1.3);opacity:1}}
+
+@keyframes revealUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes revealFade{from{opacity:0}to{opacity:1}}
+
+/* ── MARQUEE STRIP ── */
+.marquee-section{
+  background:var(--terracotta);
+  padding:18px 0;
+  overflow:hidden;
+  position:relative;z-index:10;
+}
+.marquee-track{
+  display:flex;gap:0;
+  animation:marquee 20s linear infinite;
+  white-space:nowrap;
+}
+.marquee-item{
+  display:inline-flex;align-items:center;gap:20px;
+  padding:0 30px;
+  font-size:13px;letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(255,255,255,0.85);font-weight:500;
+}
+.marquee-sep{color:rgba(255,255,255,0.4);font-size:20px}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── ABOUT ── */
+#about{
+  padding:120px 60px;
+  background:var(--white);
+  position:relative;overflow:hidden;
+}
+.about-blob{
+  position:absolute;top:-200px;right:-200px;
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(200,115,90,0.06) 0%,transparent 70%);
+  border-radius:50%;pointer-events:none;
+}
+.about-blob2{
+  position:absolute;bottom:-200px;left:-100px;
+  width:500px;height:500px;
+  background:radial-gradient(circle,rgba(42,107,110,0.06) 0%,transparent 70%);
+  border-radius:50%;pointer-events:none;
+}
+
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;align-items:center;
+  position:relative;z-index:2;
+}
+.about-img-col{position:relative}
+.about-img-stack{position:relative;height:520px}
+.about-card-main{
+  position:absolute;
+  top:0;left:0;
+  width:300px;height:380px;
+  background:linear-gradient(160deg,var(--navy) 0%,var(--teal) 100%);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,0.5);
+  font-size:13px;letter-spacing:0.1em;
+  overflow:hidden;
+}
+.about-card-main::after{
+  content:'';position:absolute;
+  bottom:0;left:0;right:0;height:40%;
+  background:linear-gradient(to top,rgba(200,115,90,0.25),transparent);
+}
+.about-card-float{
+  position:absolute;
+  bottom:20px;right:-20px;
+  width:220px;height:280px;
+  background:linear-gradient(160deg,rgba(212,168,83,0.15),rgba(212,168,83,0.05));
+  border:1px solid rgba(212,168,83,0.3);
+  backdrop-filter:blur(8px);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:12px;
+  padding:30px;
+  animation:floatCard 5s ease-in-out infinite;
+}
+@keyframes floatCard{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.float-num{font-family:'Playfair Display',serif;font-size:56px;font-weight:900;color:var(--gold);line-height:1}
+.float-label{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);text-align:center;font-weight:500}
+
+.about-corner-tag{
+  position:absolute;
+  top:-16px;right:60px;
+  background:var(--terracotta);
+  color:var(--white);
+  padding:10px 20px;
+  font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;
+  box-shadow:0 4px 20px rgba(200,115,90,0.3);
+}
+
+.section-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:11px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--terracotta);font-weight:600;
+  margin-bottom:20px;
+}
+.section-tag-line{width:36px;height:1.5px;background:var(--terracotta)}
+
+.about-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(38px,4vw,58px);
+  font-weight:700;line-height:1.05;
+  color:var(--ink);margin-bottom:28px;
+}
+.about-title em{font-style:italic;color:var(--terracotta);font-weight:400}
+.about-body{
+  font-size:16px;line-height:1.9;
+  color:var(--ink-soft);font-weight:300;
+  margin-bottom:20px;
+}
+
+.detail-chips{display:flex;flex-wrap:wrap;gap:10px;margin:32px 0}
+.chip{
+  padding:8px 18px;
+  border:1px solid var(--line);
+  border-radius:100px;
+  font-size:12px;color:var(--ink-soft);font-weight:400;
+  background:var(--cream);
+  transition:all 0.3s;
+}
+.chip:hover{background:var(--terracotta);color:var(--white);border-color:var(--terracotta);transform:translateY(-2px)}
+
+/* ── STATS BAR ── */
+.stats-bar{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  background:var(--ink);
+  position:relative;z-index:10;
+}
+.stat-block{
+  padding:48px 32px;
+  border-right:1px solid rgba(255,255,255,0.07);
+  text-align:center;
+  position:relative;overflow:hidden;
+  transition:background 0.4s;
+}
+.stat-block:last-child{border-right:none}
+.stat-block:hover{background:rgba(200,115,90,0.12)}
+.stat-block::before{
+  content:'';position:absolute;
+  bottom:0;left:0;right:0;height:3px;
+  background:var(--terracotta);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s ease;
+}
+.stat-block:hover::before{transform:scaleX(1)}
+.stat-n{
+  font-family:'Playfair Display',serif;
+  font-size:56px;font-weight:900;
+  color:var(--terracotta);line-height:1;
+  margin-bottom:8px;
+}
+.stat-l{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.45);font-weight:500}
+
+/* ── PROJECTS ── */
+#projects{
+  padding:120px 60px;
+  background:var(--cream);
+  position:relative;
+}
+.projects-intro{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:60px;align-items:end;margin-bottom:70px;
+}
+.proj-h{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(40px,4.5vw,64px);
+  font-weight:700;line-height:1.05;color:var(--ink);
+}
+.proj-h em{font-style:italic;color:var(--terracotta);font-weight:400}
+.proj-sub{font-size:16px;line-height:1.8;color:var(--muted);font-weight:300;max-width:400px;align-self:end}
+
+.proj-cards{display:grid;gap:24px}
+
+.proj-card{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:40px;
+  padding:40px 48px;
+  background:var(--white);
+  border:1px solid rgba(200,115,90,0.1);
+  position:relative;overflow:hidden;
+  transition:transform 0.4s ease,box-shadow 0.4s ease,border-color 0.4s;
+  cursor:pointer;
+}
+.proj-card::before{
+  content:'';
+  position:absolute;left:0;top:0;bottom:0;
+  width:4px;
+  background:linear-gradient(to bottom,var(--terracotta),var(--rust));
+  transform:scaleY(0);transform-origin:top;
+  transition:transform 0.4s ease;
+}
+.proj-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 24px 64px rgba(0,0,0,0.1);
+  border-color:rgba(200,115,90,0.3);
+}
+.proj-card:hover::before{transform:scaleY(1)}
+
+/* Background gradient reveal on hover */
+.proj-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(200,115,90,0.03) 0%,rgba(42,107,110,0.03) 100%);
+  opacity:0;transition:opacity 0.4s;
+}
+.proj-card:hover::after{opacity:1}
+
+.pc-num{
+  font-family:'Playfair Display',serif;
+  font-size:72px;font-weight:900;
+  color:rgba(200,115,90,0.1);
+  line-height:1;
+  transition:color 0.4s;
+  position:relative;z-index:1;
+}
+.proj-card:hover .pc-num{color:rgba(200,115,90,0.2)}
+.pc-body{position:relative;z-index:1}
+.pc-meta{
+  display:flex;align-items:center;gap:16px;
+  margin-bottom:12px;
+}
+.pc-date{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.pc-role-tag{
+  padding:4px 14px;
+  background:rgba(200,115,90,0.1);
+  color:var(--terracotta);
+  font-size:11px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;
+  border-radius:100px;
+  border:1px solid rgba(200,115,90,0.2);
+}
+.pc-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(26px,3vw,38px);
+  font-weight:700;color:var(--ink);
+  margin-bottom:14px;line-height:1.1;
+}
+.pc-desc{
+  font-size:14px;line-height:1.8;
+  color:var(--muted);font-weight:300;
+}
+.pc-desc li{margin-bottom:4px;margin-left:16px}
+.pc-arrow{
+  font-size:28px;color:rgba(200,115,90,0.2);
+  transition:color 0.3s,transform 0.3s;
+  position:relative;z-index:1;
+}
+.proj-card:hover .pc-arrow{color:var(--terracotta);transform:translateX(8px)}
+
+/* Colored card variations */
+.proj-card.teal-accent::before{background:linear-gradient(to bottom,var(--teal),var(--teal-light))}
+.proj-card.teal-accent .pc-role-tag{background:rgba(42,107,110,0.1);color:var(--teal);border-color:rgba(42,107,110,0.2)}
+.proj-card.gold-accent::before{background:linear-gradient(to bottom,var(--gold),var(--gold-light))}
+.proj-card.gold-accent .pc-role-tag{background:rgba(212,168,83,0.12);color:#a07820;border-color:rgba(212,168,83,0.3)}
+.proj-card.gold-accent:hover .pc-arrow{color:var(--gold)}
+
+/* ── SKILLS ── */
+#skills{
+  padding:120px 60px;
+  background:var(--navy);
+  position:relative;overflow:hidden;
+}
+.skills-bg-text{
+  position:absolute;
+  font-family:'Playfair Display',serif;
+  font-size:220px;font-weight:900;
+  color:rgba(255,255,255,0.02);
+  white-space:nowrap;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;letter-spacing:-0.05em;
+  user-select:none;
+}
+.skills-grid-top{
+  display:grid;grid-template-columns:1fr 2fr;
+  gap:80px;align-items:center;margin-bottom:70px;
+}
+#skills .section-tag{color:rgba(200,115,90,0.9)}
+#skills .section-tag-line{background:var(--terracotta)}
+.skills-h{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(40px,4vw,60px);
+  font-weight:700;color:var(--white);
+  line-height:1.05;
+}
+.skills-h em{font-style:italic;color:var(--terracotta);font-weight:400}
+.skills-desc{font-size:15px;line-height:1.85;color:rgba(255,255,255,0.45);font-weight:300}
+
+.skills-groups{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:2px;
+}
+.skill-grp{
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.05);
+  padding:40px 32px;
+  transition:background 0.4s,border-color 0.4s,transform 0.3s;
+  position:relative;overflow:hidden;
+}
+.skill-grp::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:3px;
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s ease;
+}
+.skill-grp.c1::before{background:var(--terracotta)}
+.skill-grp.c2::before{background:var(--teal-light)}
+.skill-grp.c3::before{background:var(--gold)}
+.skill-grp:hover{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);transform:translateY(-4px)}
+.skill-grp:hover::before{transform:scaleX(1)}
+
+.sg-icon{font-size:36px;margin-bottom:16px}
+.sg-title{
+  font-size:11px;letter-spacing:0.18em;text-transform:uppercase;
+  font-weight:600;margin-bottom:28px;
+}
+.skill-grp.c1 .sg-title{color:var(--terracotta)}
+.skill-grp.c2 .sg-title{color:var(--teal-light)}
+.skill-grp.c3 .sg-title{color:var(--gold)}
+
+.skill-pill{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:14px;
+  font-size:14px;font-weight:300;
+  color:rgba(255,255,255,0.65);
+}
+.sp-dot{
+  width:6px;height:6px;border-radius:50%;flex-shrink:0;
+}
+.c1 .sp-dot{background:var(--terracotta)}
+.c2 .sp-dot{background:var(--teal-light)}
+.c3 .sp-dot{background:var(--gold)}
+
+/* Skill bars */
+.skill-bar-wrap{margin-top:4px;height:2px;background:rgba(255,255,255,0.08);flex:1;border-radius:2px;overflow:hidden}
+.skill-bar{height:100%;border-radius:2px;width:0;transition:width 1.2s ease}
+.c1 .skill-bar{background:var(--terracotta)}
+.c2 .skill-bar{background:var(--teal-light)}
+.c3 .skill-bar{background:var(--gold)}
+
+/* ── EDUCATION ── */
+#education{
+  padding:120px 60px;
+  background:var(--blush);
+  position:relative;overflow:hidden;
+}
+.edu-bg-circle{
+  position:absolute;top:-300px;right:-200px;
+  width:800px;height:800px;
+  border-radius:50%;
+  border:1px solid rgba(200,115,90,0.1);
+  pointer-events:none;
+}
+.edu-bg-circle2{
+  position:absolute;bottom:-300px;left:-200px;
+  width:600px;height:600px;
+  border-radius:50%;
+  border:1px solid rgba(42,107,110,0.1);
+  pointer-events:none;
+}
+.edu-inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:start;
+  position:relative;z-index:2;
+}
+.edu-h{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(40px,4vw,60px);
+  font-weight:700;line-height:1.05;
+  color:var(--ink);margin-bottom:48px;
+}
+.edu-h em{font-style:italic;color:var(--terracotta);font-weight:400}
+
+.edu-card{
+  background:var(--white);
+  padding:40px;
+  border-left:4px solid var(--terracotta);
+  margin-bottom:24px;
+  position:relative;
+  transition:transform 0.3s,box-shadow 0.3s;
+  box-shadow:0 2px 20px rgba(0,0,0,0.04);
+}
+.edu-card:hover{transform:translateX(8px);box-shadow:0 8px 40px rgba(0,0,0,0.08)}
+.edu-card.teal-border{border-left-color:var(--teal)}
+.edu-period{
+  font-size:11px;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--terracotta);font-weight:600;margin-bottom:10px;
+}
+.edu-card.teal-border .edu-period{color:var(--teal)}
+.edu-degree{
+  font-family:'Playfair Display',serif;
+  font-size:24px;font-weight:700;
+  color:var(--ink);margin-bottom:6px;
+}
+.edu-inst{font-size:15px;color:var(--muted);font-weight:300}
+.edu-detail{
+  font-size:13px;color:var(--terracotta);
+  margin-top:12px;font-weight:500;
+}
+
+/* Visual side of education */
+.edu-visual{
+  position:relative;height:500px;
+}
+.edu-vis-main{
+  position:absolute;top:0;right:0;
+  width:300px;height:380px;
+  background:linear-gradient(160deg,var(--navy),var(--teal));
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.edu-vis-main::after{
+  content:'"';
+  font-family:'Playfair Display',serif;
+  font-size:300px;font-weight:900;
+  color:rgba(255,255,255,0.05);
+  position:absolute;
+  top:-60px;left:-20px;
+  line-height:1;
+}
+.edu-vis-text{
+  position:relative;z-index:1;
+  text-align:center;padding:32px;
+  color:var(--white);
+}
+.edu-vis-text .big{
+  font-family:'Playfair Display',serif;
+  font-size:52px;font-weight:900;
+  color:var(--gold);display:block;
+}
+.edu-vis-text .small{font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);font-weight:500}
+
+.edu-vis-float{
+  position:absolute;bottom:40px;left:0;
+  width:240px;
+  background:var(--terracotta);
+  padding:28px;
+  color:var(--white);
+  box-shadow:0 12px 40px rgba(200,115,90,0.35);
+  animation:floatCard 5s 1s ease-in-out infinite;
+}
+.edu-vis-float-label{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;opacity:0.7;margin-bottom:8px}
+.edu-vis-float-text{font-size:18px;font-weight:600;line-height:1.3}
+
+/* ── CONTACT ── */
+#contact{
+  padding:120px 60px;
+  background:var(--ink);
+  position:relative;overflow:hidden;
+}
+.contact-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 50% 80% at 80% 50%,rgba(200,115,90,0.08) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 60% at 20% 80%,rgba(42,107,110,0.07) 0%,transparent 60%);
+  pointer-events:none;
+}
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:start;
+  position:relative;z-index:2;
+}
+.contact-h{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(40px,4vw,62px);
+  font-weight:700;line-height:1.05;
+  color:var(--white);margin-bottom:24px;
+}
+.contact-h em{font-style:italic;color:var(--terracotta);font-weight:400}
+.contact-p{font-size:16px;line-height:1.85;color:rgba(255,255,255,0.45);font-weight:300;margin-bottom:48px}
+
+.contact-links{display:grid;gap:16px}
+.c-link{
+  display:flex;align-items:center;gap:20px;
+  padding:20px 24px;
+  border:1px solid rgba(255,255,255,0.07);
+  text-decoration:none;
+  background:rgba(255,255,255,0.02);
+  transition:all 0.3s;
+}
+.c-link:hover{border-color:rgba(200,115,90,0.4);background:rgba(200,115,90,0.06);transform:translateX(6px)}
+.c-icon{
+  width:44px;height:44px;
+  background:rgba(200,115,90,0.1);
+  border:1px solid rgba(200,115,90,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+  transition:background 0.3s;
+}
+.c-link:hover .c-icon{background:var(--terracotta)}
+.c-lbl{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.35);font-weight:500;margin-bottom:3px}
+.c-val{font-size:15px;color:rgba(255,255,255,0.7);font-weight:300}
+.c-link.teal:hover{border-color:rgba(42,107,110,0.4);background:rgba(42,107,110,0.06)}
+.c-link.teal .c-icon{background:rgba(42,107,110,0.1);border-color:rgba(42,107,110,0.2)}
+.c-link.teal:hover .c-icon{background:var(--teal)}
+
+/* Form */
+.form-wrap{display:grid;gap:20px}
+.fg{display:grid;gap:8px}
+.fg label{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.4);font-weight:500}
+.fg input,.fg textarea{
+  padding:16px 20px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  color:rgba(255,255,255,0.8);
+  font-family:'Outfit',sans-serif;
+  font-size:15px;font-weight:300;
+  outline:none;resize:none;
+  transition:border-color 0.3s,background 0.3s;
+}
+.fg input:focus,.fg textarea:focus{
+  border-color:rgba(200,115,90,0.5);
+  background:rgba(200,115,90,0.04);
+}
+.fg textarea{height:130px}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(255,255,255,0.2)}
+.btn-send{
+  padding:18px 44px;
+  background:linear-gradient(135deg,var(--terracotta),var(--rust));
+  color:var(--white);
+  border:none;cursor:pointer;
+  font-family:'Outfit',sans-serif;
+  font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;
+  transition:all 0.3s;justify-self:start;
+  box-shadow:0 4px 24px rgba(200,115,90,0.3);
+  position:relative;overflow:hidden;
+}
+.btn-send::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--rust),var(--terracotta-dark));
+  opacity:0;transition:opacity 0.3s;
+}
+.btn-send:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(200,115,90,0.4)}
+.btn-send:hover::before{opacity:1}
+.btn-send span{position:relative;z-index:1}
+
+/* ── FOOTER ── */
+footer{
+  padding:40px 60px;
+  background:#111008;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:20px;
+  border-top:1px solid rgba(255,255,255,0.05);
+}
+.foot-logo{
+  font-family:'Playfair Display',serif;
+  font-size:18px;font-weight:700;
+  color:rgba(255,255,255,0.5);letter-spacing:0.04em;
+}
+.foot-copy{font-size:12px;color:rgba(255,255,255,0.2);font-weight:300}
+.foot-links{display:flex;gap:24px}
+.foot-links a{
+  font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(255,255,255,0.25);text-decoration:none;
+  transition:color 0.3s;
+}
+.foot-links a:hover{color:var(--terracotta)}
+
+/* ── SCROLL REVEAL ── */
+.sr{opacity:0;transform:translateY(50px);transition:opacity 0.8s ease,transform 0.8s ease}
+.sr.vis{opacity:1;transform:translateY(0)}
+.sr-left{opacity:0;transform:translateX(-50px);transition:opacity 0.8s ease,transform 0.8s ease}
+.sr-left.vis{opacity:1;transform:translateX(0)}
+.sr-right{opacity:0;transform:translateX(50px);transition:opacity 0.8s ease,transform 0.8s ease}
+.sr-right.vis{opacity:1;transform:translateX(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1000px){
+  nav{padding:18px 24px}
+  nav.scrolled{padding:12px 24px}
+  .nav-links{display:none}
+  #hero{padding:120px 24px 80px}
+  .hero-right-visual{display:none}
+  .film-strip{width:0;opacity:0}
+  .hero-content{max-width:100%;padding:120px 0 80px}
+  section,#about,#projects,#skills,#education,#contact{padding:80px 24px}
+  .about-grid,.projects-intro,.edu-inner,.contact-grid{grid-template-columns:1fr;gap:40px}
+  .skills-groups{grid-template-columns:1fr}
+  .skills-grid-top{grid-template-columns:1fr;gap:20px}
+  .stats-bar{grid-template-columns:1fr 1fr}
+  .stat-block{border-bottom:1px solid rgba(255,255,255,0.07)}
+  .about-img-col,.edu-visual{display:none}
+  .proj-card{grid-template-columns:auto 1fr;padding:28px 24px}
+  .pc-arrow{display:none}
+  footer{padding:28px 24px;flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-text"><span>Anuja Neupane</span></div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+</div>
+
+<!-- CURSOR -->
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">Anuja Neupane</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <!-- Background elements -->
+  <div class="film-strip"></div>
+  <div class="geo geo-circle"></div>
+  <div class="geo geo-circle2"></div>
+  <div class="geo geo-dot"></div>
+  <div class="geo geo-dot"></div>
+  <div class="geo geo-dot"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag"><span class="hero-tag-dot"></span>Filmmaking Student</div>
+    <h1 class="hero-h1">
+      Anuja
+      <span class="line2">Neupane</span>
+    </h1>
+    <div class="hero-subtitle">Direction · Storytelling </div>
+    <p class="hero-desc">
+      A passionate filmmaking student crafting stories that explore the raw beauty of human emotions and real life situations through the lens, in every frame.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-a"><span>View My Work</span></a>
+      <a href="#contact" class="btn-b">Get in Touch</a>
+    </div>
+  </div>
+
+  <!-- Right visual -->
+  <div class="hero-right-visual">
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-deco2"></div>
+      <div class="hero-photo-deco"></div>
+      <div class="photo-placeholder">
+        <img class="hero-photo" src="anuja.png" alt="Anuja Neupane">
+        <svg width="140" height="140" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="70" cy="52" r="36" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          <ellipse cx="70" cy="130" rx="56" ry="32" fill="rgba(255,255,255,0.06)"/>
+          <text x="70" y="168" text-anchor="middle" font-family="Outfit" font-size="10" fill="rgba(255,255,255,0.3)" letter-spacing="1">Add your photo here</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue">
+    <div class="scroll-cue-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <!-- Two sets for seamless loop -->
+    <div class="marquee-item">Film Direction <span class="marquee-sep">✦</span></div>
+    <div class="marquee-item">Storytelling <span class="marquee-sep">✦</span></div>
+    <div class="marquee-item">Production Design <span class="marquee-sep">✦</span></div>
+    <div class="marquee-item">Screenplay Writing <span class="marquee-sep">✦</span></div>
+    <div class="marquee-item">Character Development <span class="marquee-sep">✦</span></div>
+    <div class="marquee-item">DaVinci Resolve <span class="marquee-sep">✦</span></div>
+    <div class="marquee-item">Parallel Editing <span class="marquee-sep">✦</span></div>
+    <div class="marquee-item">On-Set Direction <span class="marquee-sep">✦</span></div>
+    <div class="marquee-item">Film Direction <span class="marquee-sep">✦</span></div>
+    <div class="marquee-item">Storytelling <span class="marquee-sep">✦</span></div>
+    <div class="marquee-item">Production Design <span class="marquee-sep">✦</span></div>
+    <div class="marquee-item">Screenplay Writing <span class="marquee-sep">✦</span></div>
+    <div class="marquee-item">Character Development <span class="marquee-sep">✦</span></div>
+    <div class="marquee-item">DaVinci Resolve <span class="marquee-sep">✦</span></div>
+    <div class="marquee-item">Parallel Editing <span class="marquee-sep">✦</span></div>
+    <div class="marquee-item">On-Set Direction <span class="marquee-sep">✦</span></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-blob"></div>
+  <div class="about-blob2"></div>
+  <div class="about-grid">
+    <div class="about-img-col sr-left">
+      <div class="about-img-stack">
+        <div class="about-card-main">
+          <span style="font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3)"><img class="hero-photo" src="anuja.png" alt="Anuja Neupane"></span>
+        </div>
+        <div class="about-card-float">
+          <div class="float-num">3+</div>
+          <div class="float-label">Creative<br>Projects</div>
+        </div>
+        <div class="about-corner-tag">Filmmaker</div>
+      </div>
+    </div>
+    <div class="sr-right">
+      <div class="section-tag"><div class="section-tag-line"></div>About Me</div>
+      <h2 class="about-title">The <em>Story</em><br>Behind the Lens</h2>
+      <p class="about-body">I am a filmmaking student at Tribhuwan University's Oscar International College in Kathmandu, deeply passionate about direction and storytelling. My creative work centres on exploring authentic human emotions and real life situations through the lens.</p>
+      <p class="about-body">Through academic projects, I've built hands on experience spanning assistant directing, production design, and independently directing short films approaching every project with curiosity, discipline, and a commitment to visual excellence.</p>
+      <div class="detail-chips">
+        <span class="chip">📍 Kathmandu, Nepal</span>
+        <span class="chip">🎬 Bachelor in Film Studies</span>
+        <span class="chip">✏️ Direction &amp; Screenplay</span>
+        <span class="chip">🎞️ DaVinci Resolve</span>
+        <span class="chip">🌏 Nepalese</span>
+        <span class="chip">📧 Open to Opportunities</span>
+      </div>
+      <a href="#contact" class="btn-a" style="font-size:12px;"><span>Let's Connect</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-block sr">
+    <div class="stat-n" data-count="3">0</div>
+    <div class="stat-l">Projects Completed</div>
+  </div>
+  <div class="stat-block sr">
+    <div class="stat-n" data-count="5">0</div>
+    <div class="stat-l">Minutes Short Film Directed</div>
+  </div>
+  <div class="stat-block sr">
+    <div class="stat-n" data-count="3">0</div>
+    <div class="stat-l">Roles Mastered</div>
+  </div>
+  <div class="stat-block sr">
+    <div class="stat-n">∞</div>
+    <div class="stat-l">Stories to Tell</div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="projects-intro">
+    <div class="sr-left">
+      <div class="section-tag"><div class="section-tag-line"></div>Selected Work</div>
+      <h2 class="proj-h">Creative<br><em>Projects</em></h2>
+    </div>
+    <p class="proj-sub sr-right">Each project is a step forward exploring new roles, techniques, and stories that challenge and grow my craft as a filmmaker.</p>
+  </div>
+
+  <div class="proj-cards">
+    <div class="proj-card sr">
+      <div class="pc-num">01</div>
+      <div class="pc-body">
+        <div class="pc-meta">
+          <div class="pc-date">Oct 2025 – Feb 2026</div>
+          <div class="pc-role-tag">Assistant Director</div>
+        </div>
+        <h3 class="pc-title">My First Cinema</h3>
+        <ul class="pc-desc">
+          <li>First college assigned film project worked alongside the director through the entire production</li>
+          <li>Coordinated between actors and departments to ensure smooth shoot execution</li>
+          <li>Gained crucial on set experience managing a real production workflow</li>
+        </ul>
+      </div>
+      <div class="pc-arrow">→</div>
+    </div>
+
+    <div class="proj-card teal-accent sr">
+      <div class="pc-num">02</div>
+      <div class="pc-body">
+        <div class="pc-meta">
+          <div class="pc-date">Jan 2026 – Feb 2026</div>
+          <div class="pc-role-tag">Production Designer</div>
+        </div>
+        <h3 class="pc-title">Farkiyeko Ujyalo</h3>
+        <ul class="pc-desc">
+          <li>Designed and arranged all sets and props to support the visual narrative</li>
+          <li>Crafted the complete visual atmosphere and aesthetic of each scene</li>
+          <li>Worked closely with the director to bring the visual world to life</li>
+        </ul>
+      </div>
+      <div class="pc-arrow">→</div>
+    </div>
+
+    <div class="proj-card gold-accent sr">
+      <div class="pc-num">03</div>
+      <div class="pc-body">
+        <div class="pc-meta">
+          <div class="pc-date">Jan 2026 – Feb 2026</div>
+          <div class="pc-role-tag">Director · Actor</div>
+        </div>
+        <h3 class="pc-title">Waiting</h3>
+        <ul class="pc-desc">
+          <li>Wrote and directed a 5 minute short film structured around parallel editing technique</li>
+          <li>Performed an acting role while simultaneously managing all directorial responsibilities</li>
+          <li>Managed actors, camera placement, and supervised storytelling from concept to final cut</li>
+        </ul>
+      </div>
+      <div class="pc-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="skills-bg-text">SKILLS</div>
+  <div class="skills-grid-top">
+    <div class="sr-left">
+      <div class="section-tag"><div class="section-tag-line"></div>Expertise</div>
+      <h2 class="skills-h">Skills &amp;<br><em>Capabilities</em></h2>
+    </div>
+    <p class="skills-desc sr-right">A growing toolkit built through real hands on projects from scripting and directing to production design and post production editing.</p>
+  </div>
+  <div class="skills-groups">
+    <div class="skill-grp c1 sr">
+      <div class="sg-icon">🎬</div>
+      <div class="sg-title">Filmmaking</div>
+      <div class="skill-pill"><span class="sp-dot"></span>Film Direction<div class="skill-bar-wrap"><div class="skill-bar" data-w="88"></div></div></div>
+      <div class="skill-pill"><span class="sp-dot"></span>Production Design<div class="skill-bar-wrap"><div class="skill-bar" data-w="80"></div></div></div>
+      <div class="skill-pill"><span class="sp-dot"></span>Screenplay (Kit Scenarist)<div class="skill-bar-wrap"><div class="skill-bar" data-w="75"></div></div></div>
+      <div class="skill-pill"><span class="sp-dot"></span>Character Development<div class="skill-bar-wrap"><div class="skill-bar" data-w="82"></div></div></div>
+      <div class="skill-pill"><span class="sp-dot"></span>Scene Execution<div class="skill-bar-wrap"><div class="skill-bar" data-w="78"></div></div></div>
+    </div>
+    <div class="skill-grp c2 sr">
+      <div class="sg-icon">🎞️</div>
+      <div class="sg-title">Production & Post</div>
+      <div class="skill-pill"><span class="sp-dot"></span>DaVinci Resolve 20<div class="skill-bar-wrap"><div class="skill-bar" data-w="70"></div></div></div>
+      <div class="skill-pill"><span class="sp-dot"></span>Parallel Editing<div class="skill-bar-wrap"><div class="skill-bar" data-w="72"></div></div></div>
+      <div class="skill-pill"><span class="sp-dot"></span>Camera Placement<div class="skill-bar-wrap"><div class="skill-bar" data-w="80"></div></div></div>
+      <div class="skill-pill"><span class="sp-dot"></span>Set Design<div class="skill-bar-wrap"><div class="skill-bar" data-w="78"></div></div></div>
+      <div class="skill-pill"><span class="sp-dot"></span>Acting<div class="skill-bar-wrap"><div class="skill-bar" data-w="65"></div></div></div>
+    </div>
+    <div class="skill-grp c3 sr">
+      <div class="sg-icon">🤝</div>
+      <div class="sg-title">Collaboration & Tools</div>
+      <div class="skill-pill"><span class="sp-dot"></span>Cast &amp; Crew Communication<div class="skill-bar-wrap"><div class="skill-bar" data-w="90"></div></div></div>
+      <div class="skill-pill"><span class="sp-dot"></span>Team Coordination<div class="skill-bar-wrap"><div class="skill-bar" data-w="86"></div></div></div>
+      <div class="skill-pill"><span class="sp-dot"></span>On-set Time Management<div class="skill-bar-wrap"><div class="skill-bar" data-w="82"></div></div></div>
+      <div class="skill-pill"><span class="sp-dot"></span>Microsoft Office Suite<div class="skill-bar-wrap"><div class="skill-bar" data-w="75"></div></div></div>
+      <div class="skill-pill"><span class="sp-dot"></span>Google Docs<div class="skill-bar-wrap"><div class="skill-bar" data-w="80"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="edu-bg-circle"></div>
+  <div class="edu-bg-circle2"></div>
+  <div class="edu-inner">
+    <div class="sr-left">
+      <div class="section-tag"><div class="section-tag-line"></div>Education</div>
+      <h2 class="edu-h">Academic<br><em>Background</em></h2>
+      <div class="edu-card">
+        <div class="edu-period">Nov 2025 – Present</div>
+        <div class="edu-degree">Bachelor in Film Studies</div>
+        <div class="edu-inst">Tribhuwan University · Oscar International College, Kathmandu</div>
+        <div class="edu-detail">Direction &amp; Screenplay Writing · <a href="https://oscar.edu.np/" target="_blank" style="color:inherit;text-decoration:underline">oscar.edu.np</a></div>
+      </div>
+      <div class="edu-card teal-border">
+        <div class="edu-period" style="color:var(--teal)">2020 – 2022</div>
+        <div class="edu-degree">Higher Secondary Education</div>
+        <div class="edu-inst">Vishwa Adarsha College, Itahari, Nepal</div>
+      </div>
+    </div>
+    <div class="sr-right edu-visual">
+      <div class="edu-vis-main">
+        <div class="edu-vis-text">
+          <span class="big">2025</span>
+          <span class="small">Started Film Studies</span>
+        </div>
+      </div>
+      <div class="edu-vis-float">
+        <div class="edu-vis-float-label">Currently studying</div>
+        <div class="edu-vis-float-text">Direction &amp; Screenplay Writing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-bg"></div>
+  <div class="contact-grid">
+    <div class="sr-left">
+      <div class="section-tag" style="color:rgba(200,115,90,0.9)"><div class="section-tag-line"></div>Contact</div>
+      <h2 class="contact-h">Let's <em>Connect</em></h2>
+      <p class="contact-p">Open to internships, collaborations, and creative opportunities. Whether you're casting, building a crew, or want to talk filmmaking reach out.</p>
+      <div class="contact-links">
+        <a href="mailto:anujaneupane20@gmail.com" class="c-link">
+          <div class="c-icon">✉</div>
+          <div><div class="c-lbl">Email</div><div class="c-val">anujaneupane20@gmail.com</div></div>
+        </a>
+        
+<a href="https://www.tiktok.com/@anuja_neupane29" target="_blank" class="c-link teal">
+  <div class="c-icon" style="background:rgba(42,107,110,0.1);border-color:rgba(42,107,110,0.2); display: flex; align-items: center; justify-content: center;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: #2a6b6e;">
+      <path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.06-2.89-.52-4.06-1.39v6.51c-.04 3.44-2.43 6.64-5.83 7.54-3.8 1-7.94-1.07-9.2-4.79-1.4-4.14 1.35-8.86 5.67-9.45v4.01c-1.89.31-3.32 2.12-3.03 4.02.32 2.06 2.42 3.42 4.45 2.87 1.55-.42 2.53-1.88 2.5-3.48V0h3.55z"/>
+    </svg>
+  </div>
+  <div>
+    <div class="c-lbl">TikTok</div>
+    <div class="c-val">View Profile</div>
+  </div>
+</a>  
+
+<a href="https://www.instagram.com/anu_jaaaa29/" target="_blank" class="c-link teal">
+  <div class="c-icon" style="background:rgba(42,107,110,0.1);border-color:rgba(42,107,110,0.2); display: flex; align-items: center; justify-content: center;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #2a6b6e;">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+    </svg>
+  </div>
+  <div>
+    <div class="c-lbl">Instagram</div>
+    <div class="c-val">View Profile</div>
+  </div>
+</a>
+        <div class="c-link" style="cursor:default">
+          <div class="c-icon">📍</div>
+          <div><div class="c-lbl">Location</div><div class="c-val">Kathmandu, Nepal</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sr-right">
+     
+      <form class="form-wrap" action="https://api.web3forms.com/submit" method="POST" onsubmit="handleForm(event)">
+  <input type="hidden" name="access_key" value="3817a5b3-fcb4-4387-84ae-d3acebd27c06">
+  <input type="hidden" name="subject" value="New message from your Portfolio">
+  
+  <div class="fg">
+    <label>Your Name</label>
+    <input type="text" name="name" placeholder="Jane Smith" required>
+  </div>
+  <div class="fg">
+    <label>Email Address</label>
+    <input type="email" name="email" placeholder="jane@studio.com" required>
+  </div>
+  <div class="fg">
+    <label>Message</label>
+    <textarea name="message" placeholder="Tell me about your project or opportunity…" required></textarea>
+  </div>
+  <button type="submit" class="btn-send" id="sendBtn"><span>Send Message →</span></button>
+</form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">Anuja Neupane</div>
+  <div class="foot-copy">© 2026 · Filmmaking Student · Kathmandu, Nepal</div>
+  <div class="foot-links">
+    <a href="#about">About</a>
+    <a href="#projects">Work</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+// ── LOADER ──
+window.addEventListener('load',()=>{
+  setTimeout(()=>{ document.getElementById('loader').classList.add('gone') }, 1800);
+});
+
+// ── CURSOR ──
+const cur=document.getElementById('cur');
+const ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.transform=`translate(${mx-6}px,${my-6}px)`;
+});
+(function animR(){
+  rx+=(mx-rx)*0.1; ry+=(my-ry)*0.1;
+  ring.style.transform=`translate(${rx-22}px,${ry-22}px)`;
+  requestAnimationFrame(animR);
+})();
+document.querySelectorAll('a,button,.proj-card,.skill-grp,.c-link,.chip').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ cur.style.transform+=' scale(2.5)'; ring.style.transform+=' scale(1.5)'; ring.style.opacity='0.25'; });
+  el.addEventListener('mouseleave',()=>{ ring.style.opacity='0.5'; });
+});
+
+// ── NAV SCROLL ──
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
+});
+
+// ── SCROLL REVEAL ──
+const srEls=document.querySelectorAll('.sr,.sr-left,.sr-right');
+const srObs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('vis'), i*80);
+      srObs.unobserve(e.target);
+    }
+  });
+},{threshold:0.12});
+srEls.forEach(el=>srObs.observe(el));
+
+// ── COUNTER ANIMATION ──
+const countEls=document.querySelectorAll('[data-count]');
+const countObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const target=+e.target.dataset.count;
+      let current=0;
+      const step=target/40;
+      const t=setInterval(()=>{
+        current+=step;
+        if(current>=target){ current=target; clearInterval(t); }
+        e.target.textContent=Math.round(current)+(target===5?'m':'+');
+      },30);
+      countObs.unobserve(e.target);
+    }
+  });
+},{threshold:0.5});
+countEls.forEach(el=>countObs.observe(el));
+
+// ── SKILL BARS ──
+const barEls=document.querySelectorAll('.skill-bar');
+const barObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const w=e.target.dataset.w;
+      setTimeout(()=>{ e.target.style.width=w+'%'; },200);
+      barObs.unobserve(e.target);
+    }
+  });
+},{threshold:0.3});
+barEls.forEach(el=>barObs.observe(el));
+
+// ── FLOATING PARTICLES ──
+function createParticles(){
+  const hero=document.getElementById('hero');
+  const colors=['rgba(200,115,90,0.4)','rgba(42,107,110,0.3)','rgba(212,168,83,0.4)'];
+  for(let i=0;i<18;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    p.style.cssText=`
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      width:${2+Math.random()*4}px;
+      height:${2+Math.random()*4}px;
+      animation:floatDot ${4+Math.random()*6}s ${Math.random()*4}s ease-in-out infinite;
+    `;
+    hero.appendChild(p);
+  }
+}
+createParticles();
+
+// ── PARALLAX HERO ──
+window.addEventListener('scroll',()=>{
+  const sy=window.scrollY;
+  const geo1=document.querySelector('.geo-circle');
+  const geo2=document.querySelector('.geo-circle2');
+  const fs=document.querySelector('.film-strip');
+  if(geo1) geo1.style.transform=`translateY(${sy*0.15}px) rotate(${sy*0.02}deg)`;
+  if(geo2) geo2.style.transform=`translateY(${sy*-0.1}px) rotate(${sy*-0.015}deg)`;
+  if(fs) fs.style.transform=`translateY(${sy*0.08}px)`;
+});
+
+// ── TILT ON PROJ CARDS ──
+document.querySelectorAll('.proj-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-0.5;
+    const y=(e.clientY-r.top)/r.height-0.5;
+    card.style.transform=`translateY(-6px) rotateX(${y*-3}deg) rotateY(${x*3}deg)`;
+  });
+  card.addEventListener('mouseleave',()=>{ card.style.transform=''; });
+});
+
+// ── FORM ──
+function handleForm(e){
+  e.preventDefault();
+  const btn=document.getElementById('sendBtn');
+  btn.querySelector('span').textContent='Sending…';
+  btn.disabled=true;
+
+  const formData = new FormData(e.target);
+
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(data.success){
+      btn.querySelector('span').textContent='✓ Message Sent!';
+      btn.style.background='linear-gradient(135deg,#3d9196,#2a6b6e)';
+      e.target.reset();
+      setTimeout(()=>{
+        btn.querySelector('span').textContent='Send Message →';
+        btn.style.background='';
+        btn.disabled=false;
+      },3000);
+    } else {
+      btn.querySelector('span').textContent='❌ Failed. Try again.';
+      btn.style.background='linear-gradient(135deg,#c0392b,#e74c3c)';
+      btn.disabled=false;
+    }
+  })
+  .catch(err => {
+    btn.querySelector('span').textContent='❌ Error. Try again.';
+    btn.style.background='linear-gradient(135deg,#c0392b,#e74c3c)';
+    btn.disabled=false;
+  });
 }
 </script>
-</head>
-
-<body class="list" id="top">
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.body.classList.add('dark');
-    } else if (localStorage.getItem("pref-theme") === "light") {
-        document.body.classList.remove('dark')
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark');
-    }
-
-</script>
-
-<header class="header">
-    <nav class="nav">
-        <div class="logo">
-            <a href="https://anuja19neupane.github.io/" accesskey="h" title="Anuja Neupane Blog (Alt + H)">Anuja Neupane Blog</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu">
-        </ul>
-    </nav>
-</header>
-<main class="main"> 
-
-<article class="first-entry"> 
-  <header class="entry-header">
-    <h2>1st year C-programming project
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>BANK MANAGEMENT SYSTEM This repository contains :  Log in feature, Sign Up feature, Profile feature:  This feature contains user details and transactions history.,   Withdraw feature, Deposit feature, Log out your account.  How do you run this program? I suggest using gcc compiler, however other compiler works too. You should use following commands in terminal to run this program successfully:
-   gcc -o out main....</p>
-  </div>
-  <footer class="entry-footer"><span title='2023-10-29 13:22:09 +0545 +0545'>October 29, 2023</span></footer>
-  <a class="entry-link" aria-label="post link to 1st year C-programming project" href="https://anuja19neupane.github.io/posts/mypost/"></a>
-</article>
-    </main>
-    
-<footer class="footer">
-    <span>&copy; 2023 <a href="https://anuja19neupane.github.io/">Anuja Neupane Blog</a></span>
-    <span>
-        Powered by
-        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-        <path d="M12 6H0l6-6z" />
-    </svg>
-</a>
-
-<script>
-    let menu = document.getElementById('menu')
-    if (menu) {
-        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var mybutton = document.getElementById("top-link");
-    window.onscroll = function () {
-        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-            mybutton.style.visibility = "visible";
-            mybutton.style.opacity = "1";
-        } else {
-            mybutton.style.visibility = "hidden";
-            mybutton.style.opacity = "0";
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.body.className.includes("dark")) {
-            document.body.classList.remove('dark');
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            document.body.classList.add('dark');
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
 </body>
-
 </html>
